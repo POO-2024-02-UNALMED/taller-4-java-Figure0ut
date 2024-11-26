@@ -1,25 +1,17 @@
 package classroom;
 
 public enum Tipo {
-    DISCIPLINAR(10, "Disciplinar"),
-    FUNDAMENTACION(20, "Fundamentación"),
-    ELECTIVA(30, "Electiva");
-
-    private final int codigo; // Atributos ahora son finales para respetar la inmutabilidad de enums
-    private final String nombre;
-
-    // Constructor para inicializar valores
+    // Definición de tipos de asignatura con código y nombre asociados
+    DISCIPLINAR(10, "Disciplinar"), // Tipo de asignatura disciplinar
+    FUNDAMENTACION(20, "Fundamentacion"), // Tipo de asignatura de fundamentación
+    ELECTIVA(30, "Electiva"); // Tipo de asignatura electiva
+    
+    private int codigo; // Código identificador del tipo de asignatura
+    private String nombre; // Nombre descriptivo del tipo de asignatura
+    
+    // Constructor privado para inicializar cada constante del enum
     private Tipo(int codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
-    }
-
-    // Métodos de acceso para obtener los valores de los atributos
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public String getNombre() {
-        return nombre;
     }
 }

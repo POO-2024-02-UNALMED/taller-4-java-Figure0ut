@@ -2,13 +2,13 @@ package classroom;
 
 public class Grupo {
 
-    private Persona[] estudiantes; // Cambiado a privado para cumplir con principios de encapsulación
-    private Persona profesor;
-    private Asignatura asignatura;
-    private final int codigo; // Mantengo como constante y aseguro inicialización
-    private String horario;
+    public Persona[] estudiantes; // Arreglo de estudiantes en el grupo
+    public Persona profesor; // Profesor asignado al grupo
+    public Asignatura asignatura; // Asignatura correspondiente al grupo
+    public final int codigo; // Código único de identificación del grupo
+    public String horario; // Horario de clases del grupo
 
-    // Constructor principal
+    // Constructor completo que inicializa todos los atributos del grupo
     public Grupo(Persona[] estudiantes, Persona profesor, Asignatura asignatura, int codigo, String horario) {
         this.estudiantes = estudiantes;
         this.profesor = profesor;
@@ -17,56 +17,36 @@ public class Grupo {
         this.horario = horario;
     }
 
-    // Constructor alternativo con cantidad de estudiantes
+    // Constructor que crea un arreglo de estudiantes basado en la cantidad especificada
     public Grupo(int cantidadEstudiantes, Persona profesor, Asignatura asignatura, int codigo, String horario) {
-        this(new Persona[cantidadEstudiantes], profesor, asignatura, codigo, horario); // Llamo al constructor principal directamente
+        Persona[] personas  = new Persona[cantidadEstudiantes];
+        this.estudiantes = personas;
+        this.profesor = profesor;
+        this.asignatura = asignatura;
+        this.codigo = codigo;
+        this.horario = horario;
     }
 
-    // Constructor con estudiantes, profesor y asignatura únicamente
+    // Constructor que inicializa grupo sin código específico
     public Grupo(Persona[] estudiantes, Persona profesor, Asignatura asignatura) {
-        this(estudiantes, profesor, asignatura, 0, "No asignado"); // Inicializo código y horario por defecto
+        this.estudiantes = estudiantes;
+        this.profesor = profesor;
+        this.asignatura = asignatura;
+        this.codigo = 0; // Inicialización por defecto del código de grupo
     }
 
-    // Método para cambiar un estudiante por otro basándose en la cédula
-    public void reemplazarEstudiante(Persona estudianteAntiguo, Persona estudianteNuevo) {
+    // Método para reemplazar un estudiante existente por otro basado en su cédula
+    void cambiarEstudiante(Persona estudianteViejo, Persona estudianteNuevo) {
         for (int i = 0; i < estudiantes.length; i++) {
-            if (estudiantes[i] != null && estudiantes[i].getCedula() == estudianteAntiguo.getCedula()) {
+            if (estudiantes[i].getCedula() == estudianteViejo.getCedula()) {
                 estudiantes[i] = estudianteNuevo;
-                return;
+                break;
             }
         }
     }
-
-    // Método para cambiar un estudiante según índice
-    public void reemplazarEstudiante(int indice, Persona nuevoEstudiante) {
-        if (indice >= 0 && indice < estudiantes.length) {
-            estudiantes[indice] = nuevoEstudiante;
-        }
-    }
-
-    // Métodos de acceso para encapsulación
-    public Persona[] getEstudiantes() {
-        return estudiantes;
-    }
-
-    public Persona getProfesor() {
-        return profesor;
-    }
-
-    public Asignatura getAsignatura() {
-        return asignatura;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public String getHorario() {
-        return horario;
-    }
-
-    // Métodos para modificar propiedades no finales
-    public void setHorario(String horario) {
-        this.horario = horario;
+    
+    // Método para reemplazar un estudiante en una posición específica del arreglo
+    void cambiarEstudiante(int indice, Persona estudiante) {
+        estudiantes[indice] = estudiante;
     }
 }

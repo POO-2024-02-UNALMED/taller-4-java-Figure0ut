@@ -2,62 +2,61 @@ package classroom;
 
 public class Persona {
 
-    private final long cedula; // Cambiado a privado para respetar encapsulación
-    private String nombre;
-    private static int totalPersonas;
-
-    // Bloque estático para inicialización de variables estáticas
+    final long cedula; // Identificación única e inmutable de la persona
+    String nombre; // Nombre de la persona
+    static int totalPersonas; // Contador estático del número total de personas creadas
+    
+    // Bloque estático para inicializar variables de clase
     static {
-        totalPersonas = 0;
+        totalPersonas = 0; // Inicialización del contador de personas
     }
 
-    // Constructor principal
+    // Constructor con cédula y nombre
     public Persona(long cedula, String nombre) {
         this.cedula = cedula;
         this.nombre = nombre;
-        incrementarTotalPersonas();
+        totalPersonas++; // Incrementa el contador de personas
     }
-
-    // Constructor alternativo con parámetros invertidos
+    
+    // Constructor con nombre y cédula en diferente orden
     public Persona(String nombre, long cedula) {
-        this(cedula, nombre); // Llama al constructor principal
+        this.cedula = cedula;
+        this.nombre = nombre;
+        totalPersonas++; // Incrementa el contador de personas
     }
 
-    // Constructor con solo cédula
+    // Constructor solo con cédula
     public Persona(long cedula) {
-        this(cedula, "Desconocido"); // Usa un nombre predeterminado
+        this.cedula = cedula;
+        this.nombre = ""; // Nombre por defecto vacío
+        totalPersonas++; // Incrementa el contador de personas
     }
 
-    // Constructor con solo nombre
+    // Constructor solo con nombre
     public Persona(String nombre) {
-        this(1, nombre); // Usa una cédula predeterminada
+        this.nombre = nombre; // Asigna el nombre proporcionado
+        cedula = 1; // Inicialización de cédula por defecto
+        totalPersonas++; // Incrementa el contador de personas
     }
 
-    // Constructor por defecto
+    // Constructor sin argumentos
     public Persona() {
-        this(0, "No asignado"); // Usa valores predeterminados
+        cedula = 0; // Cédula por defecto
+        totalPersonas++; // Incrementa el contador de personas
     }
-
-    // Métodos de acceso y modificación
+    
+    // Método para obtener la cédula
     public long getCedula() {
         return cedula;
     }
 
+    // Método para obtener el nombre
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nuevoNombre) {
-        this.nombre = nuevoNombre;
-    }
-
-    // Método para obtener el total de personas
-    public static int getTotalPersonas() {
-        return totalPersonas;
-    }
-
-    // Método para incrementar el total de personas
-    private static void incrementarTotalPersonas() {
-        totalPersonas++;
+    // Método para modificar el nombre
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }
